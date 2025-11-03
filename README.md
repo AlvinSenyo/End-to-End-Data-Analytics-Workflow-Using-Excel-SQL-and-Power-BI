@@ -78,8 +78,7 @@ SELECT * FROM sales_uk
 UNION ALL
 SELECT * FROM sales_australia;
 
-3️⃣ Data Cleaning and Processing (SQL)
-
+### **3️⃣ Data Cleaning and Processing (SQL)**
 Checked for missing values:
 
 SELECT * FROM sales_data 
@@ -101,15 +100,12 @@ ALTER TABLE sales_data ADD COLUMN total_amount NUMERIC;
 UPDATE sales_data
 SET total_amount = (price_per_unit * quantity_purchased) - discount_applied;
 
-4️⃣ Analytical SQL Queries
+### **4️⃣ Analytical SQL Queries**
 
 Revenue and Profit by Country
-
-Top 5 Bestselling Products
-
-Top 5 Sales Representatives
-
-Top 5 Store Locations
+- Top 5 Bestselling Products
+- Top 5 Sales Representatives
+- Top 5 Store Locations
 
 Summary Statistics
 
