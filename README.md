@@ -54,7 +54,6 @@ sales_usa.csv
 sales_uk.csv
 sales_australia.csv
 
-
 ---
 
 ### **2️⃣ Database Setup in PostgreSQL**
@@ -102,6 +101,8 @@ ALTER TABLE sales_data ADD COLUMN total_amount NUMERIC;
 UPDATE sales_data
 SET total_amount = (price_per_unit * quantity_purchased) - discount_applied;
 
+---
+
 ### **4️⃣ Analytical SQL Queries**
 
 Revenue and Profit by Country
@@ -120,7 +121,9 @@ FROM sales_data
 GROUP BY country
 ORDER BY total_sales DESC;
 
-5️⃣ Automating SQL Backups
+---
+
+### **5️⃣ Automating SQL Backups
 
 Installed Google Drive for Desktop.
 
@@ -133,19 +136,17 @@ Backups automatically sync to Google Drive.
 
 ✅ Provides free, version-controlled cloud safety.
 
-6️⃣ Importing into Power BI
+### **6️⃣ Importing into Power BI
 
 Connected Power BI to PostgreSQL:
-
 Server: localhost
-
-Database: data_professionals
+Database: data
 
 Imported or transformed data via Power Query.
 
 Enabled live connection for dynamic refresh from SQL.
 
-7️⃣ Building the Dashboard (Power BI)
+### **7️⃣ Building the Dashboard (Power BI)
 
 Created Measures (DAX):
 
