@@ -63,7 +63,7 @@ sales_australia.csv
 - Imported CSVs using **pgAdmin Import Tool**.  
 - Combined datasets using `UNION ALL`:
 
-```sql
+sql
 CREATE TABLE sales_data AS
 SELECT * FROM sales_canada
 UNION ALL
@@ -79,9 +79,138 @@ SELECT * FROM sales_australia;
 
 ---
 
-### **2️⃣ Database Setup in PostgreSQL**
-- Created database: `data_professionals`  
-- Defined tables (`sales_canada`, `sales_china`, etc.) with correct **data types**.  
-- Set **primary key** on `transaction_id`.  
-- Imported CSVs using **pgAdmin Import Tool**.  
-- Combined datasets using `UNION ALL`:
+### **3️⃣ Data Cleaning and Processing (SQL)**
+Checked for missing values:
+
+SELECT * FROM sales_data 
+WHERE price_per_unit IS NULL OR quantity_purchased IS NULL;
+
+
+Replaced nulls:
+
+UPDATE sales_data
+SET price_per_unit = (SELECT AVG(price_per_unit) FROM sales_data)
+WHERE price_per_unit IS NULL;
+
+
+Removed duplicates and standardized entries.
+
+Added calculated field:
+
+ALTER TABLE sales_data ADD COLUMN total_amount NUMERIC;
+UPDATE sales_data
+SET total_amount = (price_per_unit * quantity_purchased) - discount_applied;
+
+---
+
+### **4️⃣ Analytical SQL Queries**
+
+Revenue and Profit by Country
+- Top 5 Bestselling Products
+- Top 5 Sales Representatives
+- Top 5 Store Locations
+
+Summary Statistics
+Example Query:
+SELECT country, 
+       SUM(total_amount) AS total_sales, 
+       SUM(profit) AS total_profit
+FROM sales_data
+GROUP BY country
+ORDER BY total_sales DESC;
+
+---
+
+### **5️⃣ Automating SQL Backups**
+
+Installed Google Drive for Desktop.
+Configured PostgreSQL to back up automatically:
+pg_dump -U postgres data_professionals > "C:\DriveSync\backups\data_backup_2025_02_14.sql"
+
+Backups automatically sync to Google Drive.
+✅ Provides free, version-controlled cloud safety.
+
+---
+
+### **6️⃣ Importing into Power BI**
+
+Connected Power BI to PostgreSQL:
+Server: localhost
+Database: data
+
+Imported or transformed data via Power Query.
+
+Enabled live connection for dynamic refresh from SQL.
+
+---
+
+### **7️⃣ Building the Dashboard (Power BI)**
+
+Created Measures (DAX):
+
+Total Sales = SUM(sales_data[total_amount])
+Total Profit = SUM(sales_data[profit])
+Average Order Value = DIVIDE([Total Sales], DISTINCTCOUNT(sales_data[transaction_id]))
+
+Added Visuals:
+📊 KPI Cards → Sales, Profit, Orders, Discounts
+
+🔍 Slicers → Country, Store, Category, Payment Method, Date Range
+
+🗺️ Map → Sales by Region
+
+📈 Line & Bar Charts → Monthly & Daily Trends
+
+🍩 Donut Chart → Payment Method Distribution
+
+⚡ Scatter Plot → Discount vs Profit (Animated by Month)
+
+🎨 Design Tips:
+
+Consistent purple/blue color theme
+
+Subtle shadows & glow for emphasis
+
+Clean layout, no clutter
+
+---
+
+### **8️⃣ Testing and Publishing**
+
+- Verified slicers & interactivity
+
+- Saved .pbix file and published to Power BI Service
+
+- Used Publish to Web for public link
+
+⚠️ Free Power BI users must manually refresh after SQL updates.
+
+📊 Key Takeaways
+
+- End-to-end automation from data prep to visualization.
+
+- SQL-driven transformations ensure data accuracy.
+
+- Power BI enables insightful storytelling with interactivity.
+
+- Cloud backup ensures security & version control.
+
+- Seamless integration of Excel, SQL, and Power BI for business impact.
+
+---
+
+🧩 Recommendations 
+✅ Verify columns before importing to SQL
+
+✅ Always use primary keys
+
+✅ Use GROUP BY, ORDER BY, and LIMIT for summaries
+
+✅ Leverage Power Query for data cleaning
+
+✅ Maintain a consistent design theme
+
+✅ Automate database backups
+
+✅ Use AI tools (e.g., ChatGPT) for DAX & SQL troubleshooting
+
