@@ -78,6 +78,8 @@ SELECT * FROM sales_uk
 UNION ALL
 SELECT * FROM sales_australia;
 
+---
+
 ### **3️⃣ Data Cleaning and Processing (SQL)**
 Checked for missing values:
 
