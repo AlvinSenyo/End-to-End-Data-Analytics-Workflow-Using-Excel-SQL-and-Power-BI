@@ -76,3 +76,12 @@ UNION ALL
 SELECT * FROM sales_uk
 UNION ALL
 SELECT * FROM sales_australia;
+
+---
+
+### **2️⃣ Database Setup in PostgreSQL**
+- Created database: `data_professionals`  
+- Defined tables (`sales_canada`, `sales_china`, etc.) with correct **data types**.  
+- Set **primary key** on `transaction_id`.  
+- Imported CSVs using **pgAdmin Import Tool**.  
+- Combined datasets using `UNION ALL`:
